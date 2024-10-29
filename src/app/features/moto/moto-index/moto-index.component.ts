@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
     FormsModule,
   ],
   templateUrl: './moto-index.component.html',
-  styleUrl: './moto-index.component.less',
+  styleUrl: './moto-index.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MotoIndexComponent implements OnInit {

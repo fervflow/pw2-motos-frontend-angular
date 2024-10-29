@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './moto-form.component.html',
-  styleUrl: './moto-form.component.less'
+  styleUrl: './moto-form.component.scss'
 })
 export class MotoFormComponent {
   moto: Moto = {
