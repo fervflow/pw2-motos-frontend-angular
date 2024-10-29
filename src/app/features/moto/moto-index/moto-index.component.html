@@ -1,22 +1,57 @@
-@if(motos$ | async; as motos) {
-  <p>Data moto$ loaded: {{ motos | json }}</p>
-}
+<div class="card" *ngIf="motos$ | async as motos" style="text-align: center; width: 80%; margin-inline: auto;">
 
-@for (moto of motos$ | async; track moto._id ) {
-  <div>
-    <strong>Id: </strong>
-    {{ moto._id }}
-    <br>
-    <strong>Conductor: </strong>
-    {{ moto.nombre_conductor }}
-    <br>
-    <strong>Marca: </strong>
-    {{ moto.marca }}
-    <br>
-    <strong>Modelo: </strong>
-    {{ moto.modelo }}
-    <br>
-    <strong>Ubicación: </strong>
-    {{ moto.ubicacion }}
-  </div>
-}
+  <p-table [value]="motos">
+    <ng-template pTemplate="header">
+      <tr>
+        <!-- <th>ID</th> -->
+        <th style="min-width: 12rem;">Conductor</th>
+        <th style="width: 15rem;">Marca</th>
+        <th style="width: 15rem;">Modelo</th>
+        <th style="width: 15rem;">Ubicación</th>
+        <th style="width: 10rem;">Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-moto>
+      <tr>
+        <!-- <td>{{ moto._id }}</td> -->
+        <td>{{ moto.nombre_conductor }}</td>
+        <td>{{ moto.marca }}</td>
+        <td>{{ moto.modelo }}</td>
+        <td>{{ moto.ubicacion }}</td>
+        <td>
+          <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-info"
+            (click)="editMoto(moto._id)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"
+            (click)="deleteMoto(moto._id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <!-- <p-table [columns]="cols" [value]="motos" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header" let-motoColumns>
+      <tr>
+        <th *ngFor="let col of motoColumns" style="text-align: center;">
+          {{ col.header }}
+        </th>
+        <th style="width: 10rem; text-align: center;">Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-moto let-motoColumns="columns">
+      <tr>
+        <td *ngFor="let col of motoColumns" style="text-align: center;" c>
+          {{ moto[col.field] }}
+        </td>
+        <td style="text-align: center;">
+          <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-info"
+            (click)="editMoto(moto._id)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"
+            (click)="deleteMoto(moto._id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table> -->
+
+
+  <button pButton label="Agregar Motocicleta" icon="pi pi-plus" (click)="openMotoForm()" style="margin: 1rem;"></button>
+</div>

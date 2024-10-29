@@ -25,7 +25,7 @@ export class MotoService {
   }
 
   updateMoto(id: string, moto: Moto): Observable<Moto> {
-    return this.http.put<Moto>(`${this.apiUrl}/${id}`, moto);
+    return this.http.patch<Moto>(`${this.apiUrl}/${id}`, moto);
   }
 
   deleteMoto(id: string): Observable<void> {

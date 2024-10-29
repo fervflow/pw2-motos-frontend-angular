@@ -1,1 +1,37 @@
-<p>moto-form works!</p>
+<form [formGroup]="motoForm">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="_id">ID</label>
+      <input pInputText id="_id" formControlName="_id" />
+    </div>
+    <div class="p-field">
+      <label for="nombre_conductor">Conductor</label>
+      <input pInputText id="nombre_conductor" formControlName="nombre_conductor" />
+    </div>
+    <div class="p-field">
+      <label for="marca">Marca</label>
+      <input pInputText id="marca" formControlName="marca" />
+    </div>
+    <div class="p-field">
+      <label for="modelo">Modelo</label>
+      <input pInputText id="modelo" formControlName="modelo" />
+    </div>
+    <div class="p-field">
+      <label for="placa">Placa</label>
+      <input pInputText id="placa" formControlName="placa" />
+    </div>
+    <div class="p-field">
+      <label for="ubicacion">Ubicación</label>
+      <p-dropdown 
+        id="ubicacion"
+        formControlName="ubicacion"
+        [options]="locations"
+        placeholder="Selecciona una Ciudad"
+      ></p-dropdown>
+    </div>
+    <div class="p-field">
+      <button style="margin: 1rem 0;" pButton type="button" label="Guardar" (click)="saveMoto()"></button>
+      <button pButton type="button" label="Cancelar" (click)="closeDialog()" class="p-button-secondary"></button>
+    </div>
+  </div>
+</form>
