@@ -1,104 +1,22 @@
-<div *ngIf="motos.length === 0">No data available.</div>
-<div *ngIf="motos.length > 0">
-  <p>Data loaded: {{ motos | json }}</p>
-</div>
+@if(motos$ | async; as motos) {
+  <p>Data moto$ loaded: {{ motos | json }}</p>
+}
 
-<div [style.margin-bottom.rem]="2">
-  <tui-radio-list [itemContent]="content" [items]="sizes" [style.flex-direction]="'row'" [style.width]="'max-content'"
-    [(ngModel)]="size" />
-  <ng-template #content let-value>
-    {{ value === 's' ? 'Pequeño' : value === 'm' ? 'Mediano' : 'Grande' }}
-  </ng-template>
-</div>
-
-<table tuiTable class="table" [size]="size" [style.width.rem]="58">
-  <thead>
-    <tr>
-      <th tuiTh>Conductor</th>
-      <th tuiTh>Marca</th>
-      <th tuiTh>Modelo</th>
-      <th tuiTh>Placa</th>
-      <th tuiTh>Ubicacion</th>
-      <th tuiTh>Acciones</th>
-    </tr>
-  </thead>
-
-  <tbody tuiTbody [data]="motos">
-    <tr *ngFor="let moto of motos" tuiTr>
-
-      <td tuiTd>
-        <div [tuiCell]="size">
-          <tui-avatar [src]="moto.nombre_conductor| tuiInitials" [style.background]="moto.nombre_conductor| tuiAutoColor" />
-          <span tuiTitle>
-            {{ moto.nombre_conductor }}
-          </span>
-        </div>
-      </td>
-
-      <td tuiTd>
-        <div [tuiCell]="size">
-          <span tuiTitle>
-              {{ moto.marca }}
-          </span>
-        </div>
-      </td>
-      
-      <td tuiTd>
-        <div [tuiCell]="size">
-          <span tuiTitle>
-            <span tuiStatus>
-              {{ moto.modelo }}
-            </span>
-          </span>
-        </div>
-      </td>
-
-      <td tuiTd>
-        <div [tuiCell]="size">
-          <span tuiTitle>
-            <span tuiStatus>
-              {{ moto.placa }}
-            </span>
-          </span>
-        </div>
-      </td>
-
-      <td tuiTd>
-        <div [tuiCell]="size">
-          <span tuiTitle>
-            <span tuiStatus>
-              {{ moto.ubicacion }}
-            </span>
-          </span>
-        </div>
-      </td>
-
-      <td tuiTd>
-        <span tuiStatus>
-          <button appearance="action" iconStart="@tui.pencil" size="xs" tuiIconButton type="button">
-            Edit
-          </button>
-          <button appearance="action" iconStart="@tui.trash-2" size="xs" tuiIconButton type="button">
-            More
-          </button>
-        </span>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<div>
-  {{ motos[0]._id }}
-</div>
-<div>
-  {{ motos[0].nombre_conductor }}
-</div>
-<div>
-  {{ motos[0].marca }}
-</div>
-<div>
-  {{ motos[0].modelo }}
-</div>
-<div>
-  {{ motos[0].ubicacion }}
-</div>
+@for (moto of motos$ | async; track moto._id ) {
+  <div>
+    <strong>Id: </strong>
+    {{ moto._id }}
+    <br>
+    <strong>Conductor: </strong>
+    {{ moto.nombre_conductor }}
+    <br>
+    <strong>Marca: </strong>
+    {{ moto.marca }}
+    <br>
+    <strong>Modelo: </strong>
+    {{ moto.modelo }}
+    <br>
+    <strong>Ubicación: </strong>
+    {{ moto.ubicacion }}
+  </div>
+}
